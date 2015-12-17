@@ -1,0 +1,8 @@
+logindexer:
+  image: logstash
+  links:
+   - redis:redis
+   - elasticsearch:elasticsearch    
+  volumes:
+   - /home/docker/logstash:/config-dir
+  command: logstash logstash -f /config-dir/log-indexer.conf   
