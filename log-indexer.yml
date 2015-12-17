@@ -5,4 +5,4 @@ logindexer:
    - elk_elasticsearch_1:elasticsearch    
   volumes:
    - /home/docker/elk/logstash:/config-dir
-  command: logstash logstash -f /config-dir/log-indexer.conf   
+  command: logstash -f /config-dir/log-indexer.conf   
