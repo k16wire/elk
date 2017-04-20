@@ -1,0 +1,31 @@
+elasticsearch:
+  image: elasticsearch:2.4.4
+  ports:
+   - 9200:9200
+kibana:
+  image: kibana:4.6
+  ports:
+   - 5601:5601
+  links:
+   - elasticsearch:elasticsearch
+redis:
+  image: redis
+  ports:
+   - 6379:6379  
+logindexer:
+  image: logstash
+  links:
+   - redis:redis
+   - elasticsearch:elasticsearch    
+  volumes:
+   - /home/docker/logstash:/config-dir
+  command: logstash -f /config-dir/log-indexer.conf   
+logcollector:
+  image: logstash
+  ports:
+   - 4560:4560
+  links:
+   - redis:redis
+  volumes:
+   - /home/docker/logstash:/config-dir
+  command: logstash -f /config-dir/log-collector.conf
