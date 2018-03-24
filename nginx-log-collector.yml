@@ -3,14 +3,14 @@ nginx:
   ports:
     - 80
   volumes:
-   - /home/docker/nginx.conf:/etc/nginx/nginx.conf
-   - /home/docker/nginx/log:/var/log/nginx
-   - /home/docker/nginx/content:/usr/share/nginx/html
+   - /home/docker/elk/nginx.conf:/etc/nginx/nginx.conf
+   - /home/docker/elk/nginx/log:/var/log/nginx
+   - /home/docker/elk/nginx/content:/usr/share/nginx/html
 logcollector:
   image: logstash
   external_links:
    - elk_redis_1:redis
   volumes:
-   - /home/docker/nginx/log:/nginx/log
+   - /home/docker/elk/nginx/log:/nginx/log
    - /home/docker/elk/logstash:/config-dir
   command: logstash -f /config-dir/log-collector.conf
