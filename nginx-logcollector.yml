@@ -1,9 +1,9 @@
 nginx:
   image: nginx
   ports:
-    - 80
+   - 80
   volumes:
-   - /home/docker/elk/nginx.conf:/etc/nginx/nginx.conf
+   - /home/docker/elk/nginx/nginx.conf:/etc/nginx/nginx.conf
    - /home/docker/elk/nginx/log:/var/log/nginx
    - /home/docker/elk/nginx/content:/usr/share/nginx/html
 logcollector:
